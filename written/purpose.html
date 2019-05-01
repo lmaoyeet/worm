@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>written response</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Purpose" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="worm" />
+<meta property="og:description" content="worm" />
+<link rel="canonical" href="https://lmaoyeet.github.io/worm/written.html" />
+<meta property="og:url" content="https://lmaoyeet.github.io/worm/written.html" />
+<meta property="og:site_name" content="worm" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"https://lmaoyeet.github.io/worm/written.html","headline":"Purpose","description":"worm","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/worm/assets/css/style.css?v=135d72b5404b99d7786e609003fe1974ff22b096">
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <!-- <h1><a href="https://lmaoyeet.github.io/worm/">worm</a></h1> -->
+      
+
+<style>
+	body {
+		margin: 140px;
+	}
+	img {
+		width: 500px;
+		display: block;
+	}
+</style>     
+<h1 id="purpose">Purpose</h1>
+
+<p>The player controls a dot or box inside of a physically looping universe in which the object is to acquire the dot of another color, in turn, gaining points. In the event that a point is gained, a trail is made behind the “head” (anterior end) of the player. In the case that a player runs into itself, by either making a complete 180 and snapping its neck, or turning multiple times to run into the trail, the game restarts and the player’s trail is reset.</p>
+
+<h1 id="development-process">Development Process</h1>
+
+<h3 id="first-difficulty">First Difficulty</h3>
+<p>The first difficulty in the program was making the player not instantly die (because the head and tail are on the same coordinates). The player’s head was counted as a part of its tail when the length was one and therefore died because it’s touching itself. How I resolved this problem was adding a counter which was the score, it was one less than the length. This ultimately resolved all problems with the head being part of the trail.</p>
+
+<h3 id="second-difficulty">Second Difficulty</h3>
+<p>The second difficulty of this program was making the environment reset after death. The problem was that I couldn’t hide some elements and eventually had to rewrite the entirety of the reset function and instead of hiding elements, it drew over it.</p>
+
+<h1 id="main-algorithm">Main Algorithm</h1>
+
+<h3 id="how-does-it-function">How does it function?</h3>
+<p>The main algorithm uses a velocity variable and keystrokes to move the player object around the screen.</p>
+
+<h3 id="how-does-it-relate-to-the-overall-purpose">How does it relate to the overall purpose?</h3>
+<p>It allows the user to be able to actually play the game, as it is what shows the player, the background, and the desirable scoring object.</p>
+
+<h3 id="sub-algorithm-1-moving-the-player">Sub-Algorithm 1 (Moving The Player)</h3>
+<p>The player is moved using a switch case detecting keystrokes. There is a built-in function inside of the player constructor, to deal with keystrokes, called on every frame (12 per second). If the key-code is 37, change the player’s velocity to left. If it is 38 change the velocity to up. If it is 39 change the velocity to right. Finally, if the key code is 40 change the velocity to down.</p>
+
+<h3 id="sub-algorithm-2-manipulating-the-players-trail">Sub-Algorithm 2 (Manipulating the Player’s Trail)</h3>
+<p>The trail created by gaining a point is moved in accordance to the head. The trail is stored in an array along with the specific coordinates of any part of the tail at any given time. Once the player moves, the entire array is shifted to the right, and if a point is gained, the trail length grows.</p>
+
+<h1 id="abstraction">Abstraction</h1>
+
+<h3 id="code">Code</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function Player() {
+    this.tail = 1;
+    this.trail = [];
+    this.xv;
+    this.yv;
+    this.x;
+    this.y;
+    this.moveLeft = function() {
+        this.xv = -1;
+        this.yv = 0;
+    };
+    this.moveRight = function() {
+        this.xv = 1;
+        this.yv = 0;
+    };
+    this.moveUp = function() {
+        this.xv = 0;
+        this.yv = -1;
+    };
+    this.moveDown = function() {
+        this.xv = 0;
+        this.yv = 1;
+    };
+}
+</code></pre></div></div>
+
+<h3 id="managing-complexity">Managing Complexity</h3>
+<p>This abstraction manages complexity by making it so that instead of manipulating many global variables and then losing track of what does what, it makes it all in one object/constructor. This constructor function has even more functions inside of it to handle movement of the player.</p>
+
+<h3 id="cleanliness">Cleanliness</h3>
+<p>The main code would be very dirty and ugly without this abstraction. There would be loose variables all over the place, that would confuse readers of the code and possibly drive them away. Instead of changing the p.xy and p.yv all the time, this cuts it down to one line, effectively making the code 50% cleaner in those specific spots. The functions inside have intuitive names that are easy to call and understand.</p>
+
+<h1 id="the-code">The Code</h1>
+<p>The code was separated into different files. Each file will be named with a heading.</p>
+<h3 id="sketchjs-the-main-code">sketch.js (the main code)</h3>
+<p><img src="0001.jpg" alt="" />
+<img src="0002.jpg" alt="" />
+<img src="0003.jpg" alt="" /></p>
+
+<h3 id="indexhtml">index.html</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="c">&lt;!-- the title of the page --&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Worm<span class="nt">&lt;/title&gt;</span>
+    
+        <span class="c">&lt;!-- styling --&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/box.css"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/main.css"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"css/p1.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+    
+    
+        <span class="c">&lt;!-- the scripts to run the page --&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/apple.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/player.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/sketch.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/css.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    
+    
+        <span class="c">&lt;!-- favicon (it's royalty free shut up) --&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"shortcut icon"</span> <span class="na">href=</span><span class="s">"icons/snake.png"</span><span class="nt">/&gt;</span>
+    
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+
+    <span class="c">&lt;!-- THE MAIN GAME --&gt;</span>
+    <span class="c">&lt;!-- ----------------------------- --&gt;</span>
+    <span class="nt">&lt;center&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"gameContainer"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"game"</span><span class="nt">&gt;</span>
+                
+                <span class="nt">&lt;p&gt;</span> SCORE: <span class="nt">&lt;/p&gt;</span>
+                <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"score"</span><span class="nt">&gt;</span>0<span class="nt">&lt;/p&gt;</span>
+                
+                <span class="nt">&lt;canvas</span> <span class="na">id=</span><span class="s">"canvas"</span> <span class="na">width=</span><span class="s">"400"</span> <span class="na">height=</span><span class="s">"400"</span> <span class="na">style=</span><span class="s">"padding: 10px"</span><span class="nt">&gt;&lt;/canvas&gt;</span> <span class="c">&lt;!-- to draw everything on--&gt;</span>
+                
+            
+            
+        <span class="nt">&lt;/div&gt;</span>
+
+        <span class="c">&lt;!-- THE BUTTONS --&gt;</span>
+        <span class="c">&lt;!-- ----------------------------- --&gt;</span>
+
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"start"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">onclick=</span><span class="s">"run();"</span> <span class="na">class =</span><span class="err"> </span><span class="s">"box"</span><span class="na">class=</span><span class="s">"menu"</span><span class="nt">&gt;</span>Click to Start<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/center&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h3 id="maincss">main.css</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>body {
+		font-family: 'Press Start 2P', cursive;
+		background-color: #dcdde1;
+	}
+	canvas {
+			border: solid 4px black;
+	}
+	#score {
+			color: #74b9ff;
+	}
+	#game {
+			text-align: center;
+			position: absolute;
+			left: 50%;
+			/*
+			margin-left: -200px;
+			*/
+			margin-left: -15%;
+			z-index: 1;
+			box-shadow: 0 2px 3px 0px rgba(0,0,0,0.25);
+			padding: 30px;
+	}
+	.menu {
+			z-index: 2;
+			position: absolute;
+			text-align: center;
+			color: #7f8fa6;
+			transition: all .2s ease-in-out;
+	}
+	.menu:hover {
+			transform: scale(1.3); /* make it a little bigger hovering over it */
+	}
+	#click {
+			display: none;
+	}
+</code></pre></div></div>
+
+<h3 id="p1css">p1.css</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* cyrillic-ext */
+@font-face {
+	font-family: 'Press Start 2P';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Press Start 2P Regular'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v7/e3t4euO8T-267oIAQAu6jDQyK3nYivNm4I81PZQ.woff2) format('woff2');
+	unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+	font-family: 'Press Start 2P';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Press Start 2P Regular'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v7/e3t4euO8T-267oIAQAu6jDQyK3nRivNm4I81PZQ.woff2) format('woff2');
+	unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+	font-family: 'Press Start 2P';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Press Start 2P Regular'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v7/e3t4euO8T-267oIAQAu6jDQyK3nWivNm4I81PZQ.woff2) format('woff2');
+	unicode-range: U+0370-03FF;
+}
+/* latin-ext */
+@font-face {
+	font-family: 'Press Start 2P';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Press Start 2P Regular'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v7/e3t4euO8T-267oIAQAu6jDQyK3nbivNm4I81PZQ.woff2) format('woff2');
+	unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+	font-family: 'Press Start 2P';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Press Start 2P Regular'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v7/e3t4euO8T-267oIAQAu6jDQyK3nVivNm4I81.woff2) format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</code></pre></div></div>
+
+<h3 id="boxcss">box.css</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.box{
+	padding:30px;
+	margin:2%;
+	background:white;
+	border:1px solid #d6d6d6;
+	box-shadow:0 2px 3px 0px rgba(0,0,0,0.25);
+	border-radius:3px;
+	transition:.2s all;
+	filter:blur(3px);
+	opacity:.5;
+	transform: scale(.98);
+	/* margin-left: 42.8%; */
+	margin-left: -4%;
+	text-align: center;
+	margin-top: 9%;
+	position: absolute;
+	z-index: 2;
+}
+.box:hover{
+	transform:scale(1);
+	filter:blur(0px);
+	opacity:1;
+	box-shadow:0 8px 20px 0px rgba(0,0,0,0.125);
+}
+.gameContainer {
+		margin-top: 5%;
+		margin-left: -16%;
+}
+</code></pre></div></div>
+
+<h3 id="playerjs">player.js</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function Player() {
+		// variables to use in game, no actual functions ig bc im lazy and can do it without them here
+		// could use class, but lmao heck classes
+		this.tail = 1;
+		this.trail = [];
+		this.xv;
+		this.yv;
+		this.x;
+		this.y;
+		this.moveLeft = function() {
+				this.xv = -1;
+				this.yv = 0;
+		};
+		this.moveRight = function() {
+				this.xv = 1;
+				this.yv = 0;
+		};
+		this.moveUp = function() {
+				this.xv = 0;
+				this.yv = -1;
+		};
+		this.moveDown = function() {
+				this.xv = 0;
+				this.yv = 1;
+		};
+}
+</code></pre></div></div>
+
+<h3 id="cssjs">css.js</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// to show the canvas
+function show() {
+		canvas.style.display = "inline";
+		// eval(element + ".style.display='inline'");
+}
+
+// to hide the canvas
+function hide() {
+		canvas.style.display = "none";
+		// eval(element + ".style.display='none'");
+}
+
+// to hide the button
+function hideMenu() {
+		document.getElementById("start").style.display = 'none';
+}
+
+// to show the button
+function showMenu() {
+		document.getElementById("start").style.display = 'inline';
+}
+</code></pre></div></div>
+
+<h3 id="applejs">apple.js</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// not using classes bc classes r stupid ahaha 420 gucci gang
+function Apple() {
+		this.x, this.y;
+		this.move = function() {
+				a.x = Math.floor(Math.random() * tc);
+				a.y = Math.floor(Math.random() * tc);
+		};
+		this.draw = function() {
+				c.fillStyle = appleColor;
+				c.fillRect(a.x * gs, a.y * gs, gs - 2, gs - 2);
+		};
+}
+</code></pre></div></div>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    
+  </body>
+</html>
