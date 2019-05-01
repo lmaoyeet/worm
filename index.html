@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- the title of the page -->
+        <title>Worm</title>
+        
+        <!-- styling -->
+        <link rel="stylesheet" href="css/box.css">
+        <link rel="stylesheet" href="css/main.css">
+        <!--<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"> <!-- good font i like -->-->
+        <link href="css/p1.css" rel="stylesheet">
+        
+        
+        <!-- the scripts to run the page -->
+        <script src="js/apple.js"></script>
+        <script src="js/player.js"></script>
+        <script src="js/sketch.js"></script>
+        <script src="js/css.js"></script>
+        
+        
+        <!-- favicon (it's royalty free shut up) -->
+        <link rel="shortcut icon" href="icons/snake.png"/>
+        
+    </head>
+    <body>
+
+        <!-- THE MAIN GAME -->
+        <!-- ----------------------------- -->
+        <center>
+        <div class="gameContainer">
+            <div id="game">
+                    
+                    <p> SCORE: </p>
+                    <p id="score">0</p>
+                    
+                    <canvas id="canvas" width="400" height="400" style="padding: 10px"></canvas> <!-- to draw everything on-->
+                    
+                
+                
+            </div>
+
+            <!-- THE BUTTONS -->
+            <!-- ----------------------------- -->
+
+            <div id="start">
+                <a onclick="run();" class = "box"class="menu">Click to Start</a>
+            </div>
+        </div>
+    </center>
+    </body>
+</html>
