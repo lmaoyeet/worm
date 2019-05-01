@@ -161,7 +161,9 @@ The code was separated into different files. Each file will be named with a head
 		#click {
 				display: none;
 		}
+		
 ### p1.css
+
 	/* cyrillic-ext */
 	@font-face {
 		font-family: 'Press Start 2P';
@@ -202,7 +204,9 @@ The code was separated into different files. Each file will be named with a head
 		src: local('Press Start 2P Regular'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v7/e3t4euO8T-267oIAQAu6jDQyK3nVivNm4I81.woff2) format('woff2');
 		unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 	}
+	
 ### box.css
+
 	.box{
 		padding:30px;
 		margin:2%;
@@ -231,7 +235,9 @@ The code was separated into different files. Each file will be named with a head
 			margin-top: 5%;
 			margin-left: -16%;
 	}
+	
 ### player.js
+	
 	function Player() {
 			// variables to use in game, no actual functions ig bc im lazy and can do it without them here
 			// could use class, but lmao heck classes
@@ -258,7 +264,9 @@ The code was separated into different files. Each file will be named with a head
 					this.yv = 1;
 			};
 	}
+
 ### css.js
+
 	// to show the canvas
 	function show() {
 			canvas.style.display = "inline";
@@ -280,7 +288,9 @@ The code was separated into different files. Each file will be named with a head
 	function showMenu() {
 			document.getElementById("start").style.display = 'inline';
 	}
+	
 ### apple.js
+	
 	// not using classes bc classes r stupid ahaha 420 gucci gang
 	function Apple() {
 			this.x, this.y;
